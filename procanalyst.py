@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+
 import web
 import psutil
 
@@ -8,10 +9,17 @@ urls = (
         '/favicon.ico', 'favicon',
         )
 class favicon(object):
+    """
+    On base web.py process, the request for favicon.ico 404s, this make it
+    displayable and thus avoid the 404s.
+    """
     def GET(self):
         raise web.redirect('static/favicon.ico')
 
 class ProcList(object):
+    """
+    Class to render the ProcList a.k.a /proc, which displays list of processes.
+    """
     def GET(self):
         # https://groups.google.com/forum/?fromgroups=#!topic/webpy/QWOJBZMyhI4
         render = web.template.render('templates/')
@@ -19,6 +27,9 @@ class ProcList(object):
         return render.proclist(proclist)
 
 class Index(object):
+    """
+    Class to render the index a.k.a / path of the web server
+    """
     def GET(self):
         render = web.template.render('templates/')
         device = ['p1p1'] # change this to reflect your network device
@@ -31,12 +42,15 @@ class Index(object):
         return render.index(up, down, cpus, phymem, disks, disks_name)
     
     def bytes2human(self,n):
-        # taken from https://psutil.googlecode.com/svn/trunk/examples/disk_usage.py
-        # http://code.activestate.com/recipes/578019
-        # >>> bytes2human(10000)
-        # '9.8K'
-        # >>> bytes2human(100001221)
-        # '95.4M'
+        """
+        converts insane bytes into proper _human_ readable units
+        - taken from https://psutil.googlecode.com/svn/trunk/examples/disk_usage.py
+        - http://code.activestate.com/recipes/578019
+        >>> bytes2human(10000)
+        '9.8K'
+        >>> bytes2human(100001221)
+        '95.4M'
+        """
         symbols = ('K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y')
         prefix = {}
         for i, s in enumerate(symbols):
