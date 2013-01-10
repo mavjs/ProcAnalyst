@@ -1,0 +1,8 @@
+ChangeLog
+=========
+
+0.1 (2013-01-09)
+----------------
+- Currently displays basic system info and process list. [mavjs]
+- Need root access for it to work as psutil's pid.exe method requires 
+root/administrator privileges. [mavjs]
