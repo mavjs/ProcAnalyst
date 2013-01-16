@@ -5,8 +5,8 @@ ProcAnalyst
 
 Requirements
 ============
-| web.py
-| psutil
+| `web.py <http://webpy.org/>`_
+| `psutil <https://code.google.com/p/psutil/>`_
 
 How-To
 ======
@@ -16,6 +16,9 @@ a tool for installing and managing Python packages, already installed. You can i
     ~# pip install -r requirements.txt
 
 or install using your package managers.
+
+[Note Windows]: Make sure you apply the changes mentioned `here <http://blog.mavjs.org/2012/04/getting-python-libraries-installed.html>`_ to be able to execute python
+from anywhere in your command line.
 
 License
 =======
