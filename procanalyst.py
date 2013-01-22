@@ -67,10 +67,18 @@ class Index(object):
             disk_usages[i.mountpoint] = {'total':usage_total,'used':usage_used,'fstype':i.fstype}
         return disk_usages
 
-
-if not os.getuid() == 0:
-    sys.exit('\n[WARNING!] This needs to run as root/administrator! [WARNING!]\n')
-else:
-    if __name__ == "__main__":
-        app = web.application(urls, globals())
-        app.run()
+if os.name == 'posix':
+    if not os.getuid() == 0:
+        sys.exit('\n[WARNING!] This needs to run as root/administrator! [WARNING!]\n')
+    else:
+        if __name__ == "__main__":
+            app = web.application(urls, globals())
+            app.run()
+elif os.name == 'nt':
+    import ctypes
+    if not ctypes.windll.shell32.IsUserAnAdmin() == 1:
+        sys.exit('\n[WARNING!] This needs to run as root/administrator! [WARNING!]\n')
+    else:
+        if __name__ == "__main__":
+            app = web.application(urls, globals())
+            app.run()
