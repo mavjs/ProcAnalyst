@@ -66,6 +66,8 @@ $def with (proclist)
                             </thead>
                             <tbody>
                                 $for i in proclist:
+                                $if i.pid == 0:
+                                    $pass
                                 <tr>
                                     <td>
                                         $i.pid
