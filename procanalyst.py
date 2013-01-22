@@ -34,7 +34,7 @@ class Index(object):
     Class to render the index a.k.a / path of the web server
     """
     def __init__(self):
-        self.inet_dev, self.convert, self.username, self.password, self.smtp_srv = ParseConfig().getvals()
+        self.inet_dev, self.convert = ParseConfig().getmiscvar()
         
     def GET(self):
         render = web.template.render('templates/')
