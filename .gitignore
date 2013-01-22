@@ -1,2 +1,4 @@
 *.py[o|c]
 test_config.ini
+test.py
+testemailsend.py
