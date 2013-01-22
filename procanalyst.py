@@ -57,13 +57,16 @@ class Index(object):
     def get_disk_usage(self):
         disk_usages = {}
         for i in psutil.disk_partitions():
-            usage = psutil.disk_usage(i.mountpoint)
-            if self.convert:
-                usage_total = HumanReadable(usage.total).bytes2human()
-                usage_used = HumanReadable(usage.used).bytes2human()
-            else:
-                usage_total = usage.total
-                usage_used = usage.used
+            try:
+                usage = psutil.disk_usage(i.mountpoint)
+                if self.convert:
+                    usage_total = HumanReadable(usage.total).bytes2human()
+                    usage_used = HumanReadable(usage.used).bytes2human()
+                else:
+                    usage_total = usage.total
+                    usage_used = usage.used
+            except OSError:
+                pass
             disk_usages[i.mountpoint] = {'total':usage_total,'used':usage_used,'fstype':i.fstype}
         return disk_usages
 
