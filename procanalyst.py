@@ -27,7 +27,8 @@ class ProcList(object):
         # https://groups.google.com/forum/?fromgroups=#!topic/webpy/QWOJBZMyhI4
         render = web.template.render('templates/')
         proclist = psutil.get_process_list()
-        return render.proclist(proclist)
+        ostype = os.name
+        return render.proclist(proclist, ostype)
 
 class Index(object):
     """

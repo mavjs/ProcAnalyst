@@ -1,4 +1,4 @@
-$def with (proclist)
+$def with (proclist, ostype)
 <html lang="en"> 
     <head>
         <meta charset="utf-8">
@@ -57,32 +57,51 @@ $def with (proclist)
                         <table class="table table-bordered table-condensed">
                             <thead>
                                 <tr>
-                                    <td>Process ID</td>
-                                    <td>Process Name</td>
-                                    <td>User</td>
-                                    <td>Process Exe</td>
-                                    <td>Process Status</td>
+                                    $if ostype == 'nt':
+                                        <td>Process ID</td>
+                                        <td>Process Name</td>
+                                        <td>User</td>
+                                    $elif ostype == 'posix':
+                                        <td>Process ID</td>
+                                        <td>Process Name</td>
+                                        <td>User</td>
+                                        <td>Process Exe</td>
+                                        <td>Process Status</td>
                                 </tr>
                             </thead>
                             <tbody>
-                                $for i in proclist:
-                                <tr>
-                                    <td>
-                                        $i.pid
-                                    </td>
-                                    <td>
-                                        $i.name
-                                    </td>
-                                    <td>
-                                        $i.username
-                                    </td>
-                                    <td>
-                                        $i.exe
-                                    </td>
-                                    <td>
-                                        $i.status
-                                    </td>
-                                </tr>
+                                $if ostype == 'nt':
+                                        $for i in proclist:
+                                        <tr>
+                                            <td>
+                                            $i.pid
+                                            </td>
+                                            <td>
+                                            $i.name
+                                            </td>
+                                            <td>
+                                            $i.username
+                                            </td>
+                                        </tr>
+                                $elif ostype == 'posix':
+                                        $for i in proclist:
+                                        <tr>
+                                            <td>
+                                            $i.pid
+                                            </td>
+                                            <td>
+                                            $i.name
+                                            </td>
+                                            <td>
+                                            $i.username
+                                            </td>
+                                            <td>
+                                            $i.exe
+                                            </td>
+                                            <td>
+                                            $i.status
+                                            </td>
+                                        </tr>
                             </tbody>
                         </table>
                     </div>
